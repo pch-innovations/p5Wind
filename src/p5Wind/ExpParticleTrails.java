@@ -34,6 +34,7 @@ public class ExpParticleTrails extends PApplet {
 	int MAX_AGE = 100;
 	boolean showConstraints = false; // C
 	boolean showTrails = true; // T
+	boolean showHeatmap = false; // H
 	boolean recording = false; // R
 
 	VerletPhysics3D physics;
@@ -49,6 +50,7 @@ public class ExpParticleTrails extends PApplet {
 	public void setup() {
 		size(1024, 576, P3D);
 		gfx = new ToxiclibsSupport(this);
+		colorMode(HSB);
 		initPhysics();
 	}
 	
@@ -143,11 +145,23 @@ public class ExpParticleTrails extends PApplet {
 		if (showTrails) {
 			strokeWeight(2);
 			for (ParticleTrail t : trails) {
+				float velocity = constrain(abs(t.head.getVelocity().magnitude()) * 10, 0, 255);
+				if (showHeatmap) {
+					stroke(255 - velocity, 255, 100);
+				} else {
+					stroke(255, velocity);
+				}
 				gfx.lineStrip3D(t.getTrail());
 			}
 		} else {
-			strokeWeight(4);
+			strokeWeight(5);
 			for (VerletParticle3D p : physics.particles) {
+				float velocity = constrain(abs(p.getVelocity().magnitude()) * 10, 0, 255);
+				if (showHeatmap) {
+					stroke(255 - velocity, 255, 100);
+				} else {
+					stroke(255, velocity);
+				}
 				point(p.x, p.y, p.z);
 			}
 		}
@@ -171,6 +185,9 @@ public class ExpParticleTrails extends PApplet {
 		}
 		if (key == 't') {
 			showTrails = !showTrails;
+		}
+		if (key == 'h') {
+			showHeatmap = !showHeatmap;
 		}
 		if (key == 'r') {
 			recording = !recording;
