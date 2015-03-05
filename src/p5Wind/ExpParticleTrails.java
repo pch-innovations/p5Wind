@@ -171,7 +171,7 @@ public class ExpParticleTrails extends PApplet {
 			saveFrame("frames/######.tga");
 			/* 
 			 * compile video like this:
-			 *    ffmpeg -f image2 -framerate 60 -i %06d.tga -vcodec mpeg4 -r 30 output.mp4
+			 *    ffmpeg -f image2 -framerate 60 -i %06d.tga -vcodec qtrle -r 30 output.mp4
 			 *    
 			 */
 		}
