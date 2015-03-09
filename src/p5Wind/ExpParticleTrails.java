@@ -22,15 +22,15 @@ import toxi.processing.ToxiclibsSupport;
 public class ExpParticleTrails extends PApplet {
 
 	public static void main(String args[]) {
-		PApplet.main(new String[] { "--present", "ExpParticleTrails" });
+		PApplet.main(new String[] { "--full-screen", "--display=1", "p5Wind.ExpParticleTrails" });
 	}
 
 	ToxiclibsSupport gfx;
 	int frameCount;
 
-	int NUM_PARTICLES = 5;
+	int NUM_PARTICLES = 50;
 	int DIFFUSION = 50;
-	int TRAIL_LENGTH = 5;
+	int TRAIL_LENGTH = 3;
 	int MAX_AGE = 100;
 	boolean showConstraints = false; // C
 	boolean showTrails = true; // T
@@ -48,7 +48,8 @@ public class ExpParticleTrails extends PApplet {
 	GravityBehavior3D gravity;
 
 	public void setup() {
-		size(1024, 576, P3D);
+		//size(1024, 576, P3D);
+		size(displayWidth, displayHeight, P3D);
 		gfx = new ToxiclibsSupport(this);
 		colorMode(HSB);
 		initPhysics();
