@@ -115,10 +115,9 @@ public class ExpParticleTrails extends PApplet {
 		lights();
 		noStroke();
 
-	    
-	    // weird origin displacement..
-		translate(width / 2, height / 2, -50);
-		rotateX(-0.33f);
+	    camera(width/4f, -height/10f, 100, 
+				0, 0, 0, 
+				0, 1, 0);
 		rotateY(frameCount/100f);
 	    
 		// constraints
